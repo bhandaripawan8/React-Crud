@@ -5,12 +5,12 @@ import Home from './Components/Home';
 import Create from './Components/Create';
 import Update from './Components/Update';
 import Read from './Components/Read';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-
+  
   return (
     <BrowserRouter>
-        <h2>Welcome to your first Axios CRUD application</h2>
     <Routes>
         <Route path='/' element={<Home/>}></Route>
         <Route path='/create' element={<Create/>}></Route>
@@ -20,5 +20,4 @@ function App() {
     </BrowserRouter>
   )
 }
-
 export default App
