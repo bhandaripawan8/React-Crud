@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 export default function Home() {
@@ -13,6 +13,17 @@ useEffect(() =>{
   .then(res => setdata(res.data))
   .catch(err => seterr(err.message));
 },[])
+
+const navigate = useNavigate();
+const handleDelete = (id) => {
+  const confirm = window.confirm("Would you like to delete the record?")
+  if(confirm) {
+    axios.delete('http://localhost:3000/users/'+id)
+    .then(res =>{
+      location.reload();
+    }).catch(err => console.log(err));
+  }
+}
 
   return (
     <>
@@ -42,8 +53,8 @@ useEffect(() =>{
                           <td>{d.phone}</td>
                           <td>
                           <Link to={`/read/${d.id}`} className='btn btn-sm btn-info me-2'>Read</Link>
-                            <button className='btn btn-sm btn-primary me-2'>Edit</button>
-                            <button className='btn btn-sm btn-danger me-2'>Delete</button>
+                            <Link to={`/update/${d.id}`} className='btn btn-sm btn-primary me-2'>Edit</Link>
+                            <button onClick={e => handleDelete(d.id)} className='btn btn-sm btn-danger me-2'>Delete</button>
                           </td>
                       </tr>
                   ))

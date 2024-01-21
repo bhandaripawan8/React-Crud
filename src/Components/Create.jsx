@@ -13,6 +13,10 @@ export default function Create() {
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (!values.name || !values.email || !values.phone) {
+      alert("Please fill in all fields before submitting.");
+      return;
+    }
     axios.post('http://localhost:3000/users', values).then (res => {
       console.log('data sent');
       navigate("/");
